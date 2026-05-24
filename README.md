@@ -1,6 +1,20 @@
-# StuddyBuddy-Study-Tool-for-Students
-This is tool where students can learn new things and encourage themselves to grow and learn new. In this project you have a lot of options that will help you to provide actually a real ideas for quiz, notes and the subjects.
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+</div>
 
-Develop By - Kaneez Fatima
-@DevPlus-max
-Copyright - 2026
+# Run and deploy your AI Studio app
+
+This contains everything you need to run your app locally.
+
+View your app in AI Studio: https://ai.studio/apps/a2caccd0-037d-45c6-aed9-dbca369e629c
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

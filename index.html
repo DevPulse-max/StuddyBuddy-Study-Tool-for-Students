@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyBuddy - Your AI Study Helper</title>
+  </head>
+  <body class="bg-slate-50 text-slate-900 font-sans antialiased">
+    <div id="app" class="min-h-screen flex text-slate-900 bg-white transition-colors duration-300">
+      
+      <!-- Sidebar - Desktop -->
+      <aside class="hidden lg:flex flex-col w-64 bg-white border-r border-slate-200 p-6 sticky top-0 h-screen shrink-0">
+        <div class="flex items-center gap-3 mb-10 px-2 text-indigo-600">
+          <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-indigo-100">
+            <!-- Brain Circuit Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5V3M12 21v-2M19 12h2M3 12h2m11.3-6.4l-1.4 1.4m-11.8 10l-1.4 1.4m14.8 0l-1.4-1.4m-11.8-10l-1.4-1.4M12 7a5 5 0 0 0-5 5c0 1.4.6 2.6 1.5 3.5l1.1.9c.7.6 1.4 1.4 1.4 2.6V20h4v-1a4 4 0 0 0 1.4-2.6l1.1-.9a5 5 0 0 0 1.5-3.5 5 5 0 0 0-5-5z"/></svg>
+          </div>
+          <span class="font-display font-bold text-xl tracking-tight text-slate-900">StudyBuddy</span>
+        </div>
+
+        <nav class="flex-1 space-y-1" id="desktop-nav">
+          <button data-tab="dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 bg-indigo-50 text-indigo-600 font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+            <span>Dashboard</span>
+          </button>
+          <button data-tab="subjects" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>Subjects</span>
+          </button>
+          <button data-tab="calendar" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>Calendar</span>
+          </button>
+          <button data-tab="notes" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>Notes</span>
+          </button>
+          <button data-tab="quiz" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+            <span>Quiz</span>
+          </button>
+          <button data-tab="theory" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            <span>Theory</span>
+          </button>
+          <button data-tab="settings" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="mt-auto p-4 bg-slate-50 rounded-2xl">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Study Goals</p>
+          <p class="text-sm font-medium text-slate-700 mb-3" id="sidebar-goal-summary">0 Subjects Tracked</p>
+          <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+            <div id="sidebar-goal-progress" class="bg-indigo-600 h-full w-0 transition-all duration-1000 shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Mobile Side Overlay Navigation -->
+      <div id="mobile-sidebar" class="fixed inset-0 z-40 lg:hidden hidden">
+        <div id="mobile-sidebar-backdrop" class="absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+        <aside id="mobile-sidebar-panel" class="absolute inset-y-0 left-0 w-72 bg-white p-6 shadow-2xl transition-transform transform -translate-x-full">
+          <div class="flex items-center justify-between mb-8">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5V3M12 21v-2M19 12h2M3 12h2m11.3-6.4l-1.4 1.4m-11.8 10l-1.4 1.4m14.8 0l-1.4-1.4m-11.8-10l-1.4-1.4M12 7a5 5 0 0 0-5 5c0 1.4.6 2.6 1.5 3.5l1.1.9c.7.6 1.4 1.4 1.4 2.6V20h4v-1a4 4 0 0 0 1.4-2.6l1.1-.9a5 5 0 0 0 1.5-3.5 5 5 0 0 0-5-5z"/></svg>
+              </div>
+              <span class="font-display font-bold text-lg tracking-tight text-slate-900">StudyBuddy</span>
+            </div>
+            <button id="close-mobile-nav" class="p-2 text-slate-500 rounded-lg hover:bg-slate-100 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <nav class="space-y-1" id="mobile-nav">
+            <button data-tab="dashboard" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 bg-indigo-50 text-indigo-600 font-medium text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+              <span>Dashboard</span>
+            </button>
+            <button data-tab="subjects" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900 text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <span>Subjects</span>
+            </button>
+            <button data-tab="calendar" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900 text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Calendar</span>
+            </button>
+            <button data-tab="notes" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900 text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span>Notes</span>
+            </button>
+            <button data-tab="quiz" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900 text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+              <span>Quiz</span>
+            </button>
+            <button data-tab="theory" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900 text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              <span>Theory</span>
+            </button>
+            <button data-tab="settings" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-slate-500 hover:bg-slate-50 hover:text-slate-900 text-left">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              <span>Settings</span>
+            </button>
+          </nav>
+        </aside>
+      </div>
+
+      <!-- Main Content Area -->
+      <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto relative">
+        
+        <!-- Top Header -->
+        <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200 px-4 lg:px-8 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <button id="open-mobile-sidebar" class="lg:hidden p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="relative hidden sm:block">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input 
+                type="text" 
+                placeholder="Search resources..." 
+                class="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 w-64 lg:w-96 transition-all text-slate-900 outline-none"
+              />
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 lg:gap-4">
+            <div class="flex items-center gap-3 pl-1">
+              <div class="hidden sm:block text-right">
+                <p id="header-user-fullname" class="text-sm font-semibold text-slate-900">Alex Study</p>
+                <p id="header-user-username" class="text-xs text-slate-500">@alex_pro_26</p>
+              </div>
+              <img 
+                id="header-user-avatar"
+                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" 
+                alt="Profile" 
+                class="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200"
+                referrerpolicy="no-referrer"
+              />
+            </div>
+          </div>
+        </header>
+
+        <!-- Content Views Container -->
+        <div class="flex-1 p-4 lg:p-8" id="views-container">
+          
+          <!-- 1. DASHBOARD VIEW -->
+          <div id="view-dashboard" class="view-section space-y-8 pb-20 lg:pb-0">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div>
+                <h1 id="welcome-message" class="text-3xl font-display font-bold text-slate-900 tracking-tight">Good afternoon, Alex!</h1>
+                <p class="text-slate-500 mt-1">Ready to solve some problems today?</p>
+              </div>
+              <button class="add-sub-trigger flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-100">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>New Goal</span>
+              </button>
+            </div>
+
+            <!-- Dashboard Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <!-- Completed Quizzes Stat -->
+              <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm transition-all hover:border-slate-200">
+                <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a4 4 0 0 1 4 4v5c0 .32-.22.61-.53.67L12 12.5l-3.47-.83A.7.7 0 0 1 8 11V6a4 4 0 0 1 4-4z"/></svg>
+                </div>
+                <p class="text-slate-500 text-sm font-medium">Completed Quizzes</p>
+                <p id="stat-quizzes" class="text-2xl font-display font-bold text-slate-900 mt-1">0</p>
+              </div>
+
+              <!-- Active Goals Stat -->
+              <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm transition-all hover:border-slate-200">
+                <div class="w-12 h-12 bg-indigo-50 text-indigo-500 rounded-xl flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <p class="text-slate-500 text-sm font-medium">Active Goals</p>
+                <p id="stat-active-goals" class="text-2xl font-display font-bold text-slate-900 mt-1">0</p>
+              </div>
+
+              <!-- Study Hours Stat -->
+              <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm transition-all hover:border-slate-200">
+                <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-xl flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V12L15 15"/><circle cx="12" cy="12" r="10"/></svg>
+                </div>
+                <p class="text-slate-500 text-sm font-medium">Study Hours</p>
+                <p id="stat-hours" class="text-2xl font-display font-bold text-slate-900 mt-1">0h</p>
+              </div>
+
+            </div>
+
+            <!-- Bento grid details -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              
+              <!-- Focus Areas -->
+              <section class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                  <h2 class="font-display font-bold text-lg">Focus Areas</h2>
+                  <button id="view-all-subjects" class="text-indigo-600 text-sm font-semibold flex items-center gap-1">
+                    View all <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  </button>
+                </div>
+                <div id="dashboard-focus-list" class="space-y-4">
+                  <!-- Rendered dynamically -->
+                </div>
+              </section>
+
+              <!-- Deep Study Tip -->
+              <section class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm relative overflow-hidden">
+                <div class="relative z-10">
+                  <div class="flex items-center justify-between mb-6">
+                    <h2 class="font-display font-bold text-lg">Deep Study Tip</h2>
+                    <div class="w-8 h-8 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5V3M12 21v-2M19 12h2M3 12h2m11.3-6.4l-1.4 1.4m-11.8 10l-1.4 1.4m14.8 0l-1.4-1.4m-11.8-10l-1.4-1.4M12 7a5 5 0 0 0-5 5c0 1.4.6 2.6 1.5 3.5l1.1.9c.7.6 1.4 1.4 1.4 2.6V20h4v-1a4 4 0 0 0 1.4-2.6l1.1-.9a5 5 0 0 0 1.5-3.5 5 5 0 0 0-5-5z"/></svg>
+                    </div>
+                  </div>
+                  <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                    <p class="text-slate-700 font-medium leading-relaxed italic">
+                      "The best way to master a complex topic is to explain it as if you were teaching a child. Try the Theory section to simplify your concepts!"
+                    </p>
+                    <div class="mt-4 flex items-center gap-2">
+                      <div class="w-6 h-6 bg-indigo-600 rounded-full flex items-center justify-center text-[10px] text-white font-bold">AI</div>
+                      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">StudyBuddy Insight</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="absolute -bottom-12 -right-12 w-48 h-48 bg-indigo-50 rounded-full blur-3xl opacity-50"></div>
+              </section>
+
+            </div>
+          </div>
+
+          <!-- 2. SUBJECTS VIEW -->
+          <div id="view-subjects" class="view-section space-y-8 pb-20 lg:pb-0 hidden">
+            <div class="flex items-center justify-between">
+              <div>
+                <h1 class="text-3xl font-display font-bold text-slate-900">Your Subjects</h1>
+                <p class="text-slate-500">Manage your active learning goals</p>
+              </div>
+              <button class="add-sub-trigger flex items-center gap-2 bg-indigo-600 text-white px-5 py-3 rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:scale-105 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>Add Subject</span>
+              </button>
+            </div>
+
+            <div id="subjects-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <!-- Rendered Dynamically -->
+            </div>
+          </div>
+
+          <!-- 3. CALENDAR VIEW -->
+          <div id="view-calendar" class="view-section space-y-6 pb-20 lg:pb-0 hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 class="text-3xl font-display font-bold">Study Schedule</h1>
+                <p class="text-slate-500">Keep track of your academic commitments</p>
+              </div>
+              <div class="flex items-center gap-2 bg-white p-1 rounded-2xl border border-slate-100 shadow-sm">
+                <button id="calendar-prev-month" class="p-2 hover:bg-slate-50 rounded-xl transition-colors text-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <span id="calendar-month-year" class="px-4 font-bold text-slate-700 min-w-[140px] text-center">May 2026</span>
+                <button id="calendar-next-month" class="p-2 hover:bg-slate-50 rounded-xl transition-colors text-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              <!-- Calendar Main Days Grid -->
+              <div class="lg:col-span-3">
+                <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+                  <div class="grid grid-cols-7 border-b border-slate-100 bg-slate-50/50">
+                    <div class="py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Sun</div>
+                    <div class="py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Mon</div>
+                    <div class="py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Tue</div>
+                    <div class="py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Wed</div>
+                    <div class="py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Thu</div>
+                    <div class="py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Fri</div>
+                    <div class="py-4 text-center text-xs font-bold text-slate-400 uppercase tracking-widest">Sat</div>
+                  </div>
+                  <div id="calendar-days-grid" class="grid grid-cols-7">
+                    <!-- Dynamic rendering of calendar days -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upcoming Events Panel -->
+              <div class="space-y-6">
+                <h2 class="font-display font-bold text-xl px-2">Upcoming Events</h2>
+                <div id="calendar-upcoming-list" class="space-y-4">
+                  <!-- Dynamically populated with events -->
+                </div>
+                <div class="bg-gradient-to-br from-indigo-600 to-indigo-700 p-6 rounded-3xl text-white shadow-xl shadow-indigo-100">
+                  <h4 class="font-bold mb-2">Sync with Google</h4>
+                  <p class="text-xs text-indigo-100 mb-4 opacity-80">Import your class schedule directly from Google Calendar.</p>
+                  <button class="w-full py-2 bg-white/20 hover:bg-white/30 rounded-xl text-xs font-bold transition-all backdrop-blur-sm cursor-pointer border border-white/10 text-white">Connect Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. NOTES VIEW -->
+          <div id="view-notes" class="view-section space-y-6 pb-20 lg:pb-0 hidden">
+            <div class="flex items-center justify-between">
+              <div>
+                <h1 class="text-3xl font-display font-bold">My Study Notes</h1>
+                <p class="text-slate-500">Capture your thoughts and concepts</p>
+              </div>
+              <button id="add-note-trigger" class="p-3 bg-indigo-600 text-white rounded-2xl shadow-lg shadow-indigo-100 hover:scale-105 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+            </div>
+
+            <!-- Notes Grid -->
+            <div id="notes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Dynamically Populated -->
+            </div>
+          </div>
+
+          <!-- 5. QUIZ VIEW -->
+          <div id="view-quiz" class="view-section space-y-8 pb-20 lg:pb-0 hidden">
+            
+            <!-- Selection Step -->
+            <div id="quiz-step-selection" class="space-y-8">
+              <div class="text-center space-y-2">
+                <h1 class="text-3xl font-display font-bold">Practical Quizzes</h1>
+                <p class="text-slate-500 text-lg font-medium">Select a current subject to generate an AI assessment</p>
+              </div>
+
+              <!-- Subjects buttons grid -->
+              <div id="quiz-subjects-list" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Dynamically populated subjects select buttons -->
+              </div>
+
+              <!-- Start Quiz call to action -->
+              <div class="flex justify-center pt-8 hidden" id="quiz-action-container">
+                <button id="start-quiz-btn" class="group relative flex items-center gap-3 px-10 py-5 bg-indigo-600 text-white rounded-3xl font-bold text-lg shadow-2xl shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all overflow-hidden cursor-pointer">
+                  <!-- Brain circuit SVG -->
+                  <svg id="quiz-btn-brain" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5V3M12 21v-2M19 12h2M3 12h2m11.3-6.4l-1.4 1.4m-11.8 10l-1.4 1.4m14.8 0l-1.4-1.4m-11.8-10l-1.4-1.4M12 7a5 5 0 0 0-5 5c0 1.4.6 2.6 1.5 3.5l1.1.9c.7.6 1.4 1.4 1.4 2.6V20h4v-1a4 4 0 0 0 1.4-2.6l1.1-.9a5 5 0 0 0 1.5-3.5 5 5 0 0 0-5-5z"/></svg>
+                  <svg id="quiz-btn-loader" class="animate-spin hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="80" stroke-dashoffset="60" stroke-linecap="round"/></svg>
+                  <span id="quiz-btn-text">Start Practical Quiz</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Quiz Engagement Step -->
+            <div id="quiz-step-engagement" class="max-w-2xl mx-auto space-y-8 hidden">
+              <div class="flex items-center justify-between px-2">
+                <span id="quiz-question-counter" class="text-xs font-bold text-slate-400 uppercase tracking-widest">Question 1 of 5</span>
+                <div id="quiz-progress-dots" class="flex gap-1">
+                  <!-- Rendered dots dynamically -->
+                </div>
+              </div>
+
+              <div class="bg-white rounded-[32px] p-8 border border-slate-100 shadow-xl space-y-8">
+                <h2 id="quiz-question-text" class="text-2xl font-bold leading-tight">Question details?</h2>
+                <div id="quiz-options-container" class="grid grid-cols-1 gap-3">
+                  <!-- Dynamically populated answer options A,B,C,D buttons -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Quiz Complete Step -->
+            <div id="quiz-step-complete" class="max-w-xl mx-auto bg-white rounded-3xl p-10 text-center space-y-6 shadow-xl border border-slate-100 hidden">
+              <div class="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto">
+                <svg class="text-indigo-600" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a4 4 0 0 1 4 4v5c0 .32-.22.61-.53.67L12 12.5l-3.47-.83A.7.7 0 0 1 8 11V6a4 4 0 0 1 4-4z"/></svg>
+              </div>
+              <div>
+                <h2 class="text-3xl font-display font-bold">Quiz Complete!</h2>
+                <p id="quiz-score-result" class="text-slate-500 mt-2">You scored 0 out of 5</p>
+              </div>
+              <button id="quiz-finish-btn" class="w-full py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all font-display cursor-pointer">
+                Review & Continue
+              </button>
+            </div>
+
+          </div>
+
+          <!-- 6. THEORY VIEW -->
+          <div id="view-theory" class="view-section space-y-10 pb-20 lg:pb-0 hidden">
+            
+            <div class="bg-indigo-600 rounded-[40px] p-8 lg:p-14 text-white relative overflow-hidden shadow-2xl shadow-indigo-100">
+              <div class="relative z-10 max-w-2xl space-y-6">
+                <h1 class="text-4xl lg:text-5xl font-display font-bold leading-tight">Master Theories</h1>
+                <p class="text-indigo-100 text-lg opacity-90 leading-relaxed">Turn your complex subjects into easy-to-understand stories.</p>
+                
+                <div id="theory-subjects-list" class="flex flex-wrap gap-4 pt-4">
+                  <!-- Selectable subjects list buttons -->
+                </div>
+
+                <button id="theory-generate-btn" disabled class="px-8 py-4 bg-white text-indigo-600 rounded-2xl font-bold hover:bg-indigo-50 transition-all flex items-center gap-2 shadow-xl shadow-indigo-900/20 disabled:opacity-50 cursor-pointer">
+                  <svg id="theory-btn-book" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <svg id="theory-btn-loader" class="animate-spin hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="80" stroke-dashoffset="60" stroke-linecap="round"/></svg>
+                  <span id="theory-btn-text">Select Subject...</span>
+                </button>
+              </div>
+              <div class="absolute -bottom-12 -right-12 w-96 h-96 bg-indigo-700 rounded-full blur-3xl opacity-30"></div>
+            </div>
+
+            <!-- Theory Result Card Container -->
+            <div id="theory-result-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8 hidden">
+              <div class="lg:col-span-2 space-y-8">
+                <div class="bg-white p-8 sm:p-12 rounded-[40px] border border-slate-100 shadow-xl space-y-8">
+                  <h2 id="theory-title" class="text-3xl font-display font-bold text-slate-900 underline decoration-indigo-200 decoration-8 underline-offset-[-2px]">Theory Title</h2>
+                  <p id="theory-content" class="text-lg text-slate-600 leading-relaxed whitespace-pre-wrap">Content theory details...</p>
+                  
+                  <div class="pt-8 border-t border-slate-50">
+                    <h4 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Practical Examples</h4>
+                    <div id="theory-examples" class="grid grid-cols-1 gap-4">
+                      <!-- Dynamically rendered examples -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recommendation Card -->
+              <div class="space-y-6">
+                <div class="bg-indigo-50 border border-indigo-100 p-8 rounded-[40px] space-y-6">
+                  <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-indigo-600 shadow-sm border border-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  </div>
+                  <div>
+                    <h3 class="text-xl font-bold text-indigo-900 font-display">Key Takeaway</h3>
+                    <p class="text-indigo-700/80 mt-2 text-sm leading-relaxed">Focus on the core mechanics rather than the formulas. Understanding the "Why" makes the "How" obvious.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 7. SETTINGS VIEW -->
+          <div id="view-settings" class="view-section space-y-8 pb-20 lg:pb-0 hidden">
+            <div class="flex items-center justify-between">
+              <div>
+                <h1 class="text-3xl font-display font-bold">Settings</h1>
+                <p class="text-slate-500">Manage your account and app preferences</p>
+              </div>
+              <button id="save-settings-btn" class="bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all cursor-pointer">
+                Save Changes
+              </button>
+            </div>
+
+            <!-- Settings Tabs toggle -->
+            <div class="flex gap-1 bg-slate-100 p-1 rounded-2xl w-fit">
+              <button id="settings-tab-profile" class="px-6 py-2 rounded-xl text-sm font-bold transition-all bg-white text-indigo-600 shadow-sm">
+                Profile
+              </button>
+              <button id="settings-tab-app" class="px-6 py-2 rounded-xl text-sm font-bold transition-all text-slate-500 hover:text-slate-700">
+                App Preferences
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8">
+              
+              <!-- Personal Info Panel -->
+              <div id="settings-pnl-profile" class="space-y-6">
+                <!-- Personal Info -->
+                <section class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm space-y-6">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Personal Information</h3>
+                  </div>
+                  
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                      <label class="text-sm font-bold text-slate-700 block">Display Name</label>
+                      <input 
+                        id="setting-profile-name"
+                        type="text" 
+                        class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
+                      />
+                    </div>
+                    <div class="space-y-2">
+                      <label class="text-sm font-bold text-slate-700 block">Username</label>
+                      <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">@</span>
+                        <input 
+                          id="setting-profile-username"
+                          type="text" 
+                          class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
+                        />
+                      </div>
+                    </div>
+                    <div class="space-y-2 md:col-span-2">
+                      <label class="text-sm font-bold text-slate-700 block">Email Address</label>
+                      <div class="relative">
+                        <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <input 
+                          id="setting-profile-email"
+                          type="email" 
+                          class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- Login & Security -->
+                <section class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm space-y-6">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Login & Security</h3>
+                  </div>
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                      <div>
+                        <p class="font-bold">Two-Factor Authentication</p>
+                        <p class="text-xs text-slate-500">Secure your account with an extra layer of protection.</p>
+                      </div>
+                      <div id="mfa-toggle-btn" class="w-12 h-6 bg-slate-200 rounded-full cursor-pointer relative transition-colors duration-200">
+                        <div class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform transform"></div>
+                      </div>
+                    </div>
+                    <button class="text-indigo-600 font-bold text-sm px-4 cursor-pointer hover:underline">Change Password</button>
+                  </div>
+                </section>
+              </div>
+
+              <!-- App Settings Panel -->
+              <div id="settings-pnl-app" class="space-y-6 hidden">
+                <!-- App Experience Settings -->
+                <section class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm space-y-8">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold">Experience & AI</h3>
+                  </div>
+
+                  <div class="space-y-6">
+                    <!-- AI Model Selection -->
+                    <div class="space-y-3">
+                      <label class="flex items-center gap-2 text-sm font-bold text-slate-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="15" x2="23" y2="15"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="15" x2="4" y2="15"/></svg>
+                        AI Model Version
+                      </label>
+                      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="settings-model-group">
+                        <button data-val="Gemini 1.5" class="py-3 px-4 rounded-xl text-xs font-bold border-2 border-slate-100 text-slate-500 hover:bg-slate-50 transition-colors">Gemini 1.5</button>
+                        <button data-val="Gemini 2.0" class="py-3 px-4 rounded-xl text-xs font-bold border-2 border-indigo-600 bg-indigo-50 text-indigo-600 transition-colors">Gemini 2.0</button>
+                        <button data-val="Experimental" class="py-3 px-4 rounded-xl text-xs font-bold border-2 border-slate-100 text-slate-500 hover:bg-slate-50 transition-colors">Experimental</button>
+                      </div>
+                    </div>
+
+                    <!-- Difficulty Selection -->
+                    <div class="space-y-3">
+                      <label class="flex items-center gap-2 text-sm font-bold text-slate-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a4 4 0 0 1 4 4v5c0 .32-.22.61-.53.67L12 12.5l-3.47-.83A.7.7 0 0 1 8 11V6a4 4 0 0 1 4-4z"/></svg>
+                        Default Learning Difficulty
+                      </label>
+                      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="settings-difficulty-group">
+                        <button data-val="Beginner" class="py-3 px-4 rounded-xl text-xs font-bold border-2 border-slate-100 text-slate-500 hover:bg-slate-50 transition-colors">Beginner</button>
+                        <button data-val="Intermediate" class="py-3 px-4 rounded-xl text-xs font-bold border-2 border-indigo-600 bg-indigo-50 text-indigo-600 transition-colors">Intermediate</button>
+                        <button data-val="Advanced" class="py-3 px-4 rounded-xl text-xs font-bold border-2 border-slate-100 text-slate-500 hover:bg-slate-50 transition-colors">Advanced</button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- Application Preferences -->
+                <section class="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm space-y-6">
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold">App Preferences</h3>
+                  </div>
+
+                  <div class="space-y-4">
+                    <!-- Study Reminders Toggle -->
+                    <div class="flex items-center justify-between p-5 bg-slate-50 rounded-2xl border border-slate-100">
+                      <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center text-slate-400 border border-slate-100 shadow-sm">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        </div>
+                        <div>
+                          <p class="font-bold">Study Reminders</p>
+                          <p class="text-xs text-slate-500">Daily nudges to keep your streak alive.</p>
+                        </div>
+                      </div>
+                      <div id="reminder-toggle-btn" class="w-14 h-8 bg-indigo-600 rounded-full cursor-pointer relative transition-colors duration-200">
+                        <div class="absolute top-1 left-7 w-6 h-6 bg-white rounded-full shadow-sm transition-transform duration-200"></div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Mobile Bottom Navigation Tab bar -->
+        <nav class="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] glass-card rounded-full p-2 flex items-center justify-around z-30 shadow-2xl shadow-indigo-100 border border-white bg-white/90 backdrop-blur-md">
+          <button data-tab="dashboard" class="nav-btn p-3 rounded-full transition-all duration-200 bg-indigo-600 text-white shadow-lg shadow-indigo-200 scale-110">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+          </button>
+          <button data-tab="subjects" class="nav-btn p-3 rounded-full transition-all duration-200 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </button>
+          <button data-tab="calendar" class="nav-btn p-3 rounded-full transition-all duration-200 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </button>
+          <button data-tab="notes" class="nav-btn p-3 rounded-full transition-all duration-200 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </button>
+          <button data-tab="quiz" class="nav-btn p-3 rounded-full transition-all duration-200 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </button>
+          <button data-tab="theory" class="nav-btn p-3 rounded-full transition-all duration-200 text-slate-400 hover:text-slate-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </button>
+        </nav>
+      </main>
+
+      <!-- MODALS -->
+
+      <!-- Subject Creator Modal -->
+      <div id="modal-add-subject" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 hidden">
+        <div class="modal-backdrop absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
+        <div class="modal-panel relative bg-white w-full max-w-xl rounded-3xl shadow-2xl overflow-hidden border border-slate-100 transition-all transform scale-95 opacity-0 duration-300">
+          <div class="p-6 sm:p-8 space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="space-y-1">
+                <h2 class="text-2xl font-display font-bold text-slate-900">New Subject Goal</h2>
+                <p class="text-slate-500 text-sm">Define what you want to master next</p>
+              </div>
+              <button class="close-modal p-2 hover:bg-slate-100 rounded-xl text-slate-400 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <label class="text-sm font-bold text-slate-700 block">Subject Title</label>
+                <input 
+                  id="subject-input-title"
+                  type="text" 
+                  placeholder="e.g. Quantum Physics 101" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-slate-900"
+                />
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-slate-700 block">Category</label>
+                  <select 
+                    id="subject-input-category"
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
+                  >
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Science">Science</option>
+                    <option value="History">History</option>
+                    <option value="Literature">Literature</option>
+                    <option value="Languages">Languages</option>
+                    <option value="Art">Art</option>
+                    <option value="Technology">Technology</option>
+                  </select>
+                </div>
+                <div class="space-y-2">
+                  <label class="text-sm font-bold text-slate-700 block">Folder</label>
+                  <div class="relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                    <input 
+                      id="subject-input-folder"
+                      type="text" 
+                      placeholder="General" 
+                      class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-sm font-bold text-slate-700 block">Tags</label>
+                <div class="flex flex-wrap gap-2 mb-2" id="subject-modal-tags-container">
+                  <!-- Rendered tags with close buttons -->
+                </div>
+                <div class="relative">
+                  <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                  <input 
+                    id="subject-input-tag"
+                    type="text" 
+                    placeholder="Press Enter to add tag" 
+                    class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-slate-900"
+                  />
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-sm font-bold text-slate-700 block">Additional Details</label>
+                <textarea 
+                  id="subject-input-details"
+                  placeholder="Specific topics, chapters, or learning goals..." 
+                  rows="3"
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none resize-none text-slate-900"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="flex gap-3 pt-4">
+              <button class="close-modal flex-1 py-4 text-slate-500 font-bold hover:bg-slate-100 rounded-2xl transition-colors cursor-pointer">
+                Cancel
+              </button>
+              <button id="subject-save-btn" disabled class="flex-[2] py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 disabled:opacity-50 transition-all cursor-pointer">
+                Save Subject
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note Modal (Add & Edit) -->
+      <div id="modal-note" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 hidden">
+        <div class="modal-backdrop absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
+        <div class="modal-panel relative bg-white w-full max-w-2xl rounded-[32px] shadow-2xl overflow-hidden border border-slate-100 transition-all transform scale-95 opacity-0 duration-300 flex flex-col max-h-[90vh]">
+          <div class="p-6 sm:p-8 space-y-6 overflow-y-auto">
+            <div class="flex items-center justify-between">
+              <h2 id="note-modal-title" class="text-2xl font-display font-bold">Create New Note</h2>
+              <button class="close-modal p-2 hover:bg-slate-100 rounded-xl text-slate-400 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+
+            <div class="space-y-6">
+              <div class="space-y-2">
+                <label class="text-sm font-bold text-slate-700 block">Category Tag</label>
+                <input 
+                  id="note-input-category"
+                  type="text" 
+                  placeholder="e.g. Physics, Personal, Exam Prep..." 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-slate-900"
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-sm font-bold text-slate-700 block">Title</label>
+                <input 
+                  id="note-input-title"
+                  type="text" 
+                  placeholder="What's on your mind?" 
+                  class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none text-xl font-bold text-slate-900"
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label class="text-sm font-bold text-slate-700 block">Content</label>
+                <textarea 
+                  id="note-input-content"
+                  placeholder="Start typing your notes here..." 
+                  rows="8"
+                  class="w-full px-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-indigo-500 transition-all outline-none resize-none text-slate-700 leading-relaxed"
+                ></textarea>
+              </div>
+
+              <div class="space-y-3">
+                <label class="text-sm font-bold text-slate-700 block">Color Variant</label>
+                <div class="flex flex-wrap gap-3" id="note-modal-colors">
+                  <!-- Selected dynamically -->
+                  <button data-color="slate" class="w-10 h-10 rounded-full border-4 border-indigo-600 scale-110 shadow-lg bg-slate-100" title="Original"></button>
+                  <button data-color="indigo" class="w-10 h-10 rounded-full border-4 border-transparent hover:scale-105 bg-indigo-400" title="Indigo"></button>
+                  <button data-color="rose" class="w-10 h-10 rounded-full border-4 border-transparent hover:scale-105 bg-rose-400" title="Rose"></button>
+                  <button data-color="amber" class="w-10 h-10 rounded-full border-4 border-transparent hover:scale-105 bg-amber-400" title="Amber"></button>
+                  <button data-color="emerald" class="w-10 h-10 rounded-full border-4 border-transparent hover:scale-105 bg-emerald-400" title="Emerald"></button>
+                  <button data-color="sky" class="w-10 h-10 rounded-full border-4 border-transparent hover:scale-105 bg-sky-400" title="Sky"></button>
+                  <button data-color="violet" class="w-10 h-10 rounded-full border-4 border-transparent hover:scale-105 bg-violet-400" title="Violet"></button>
+                  <button data-color="orange" class="w-10 h-10 rounded-full border-4 border-transparent hover:scale-105 bg-orange-400" title="Orange"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3 shrink-0">
+            <button class="close-modal flex-1 py-3 text-slate-500 font-bold hover:bg-slate-200 rounded-xl transition-colors cursor-pointer">
+              Cancel
+            </button>
+            <button id="note-save-btn" disabled class="flex-[2] py-3 bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 disabled:opacity-50 transition-all cursor-pointer">
+              Save Note
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Script entry point -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
